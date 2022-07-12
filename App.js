@@ -26,7 +26,7 @@ export default function AnimatedStyleUpdateExample(props) {
       <ImageBackground
       source={image}
       >
-  <Text>I</Text>
+  <Text>I want it all</Text>
       </ImageBackground>
       
     </View>
