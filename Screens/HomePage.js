@@ -29,12 +29,24 @@ const Live =()=>{
   )
 }
 
+const Header =()=>{
+  return(
+<View styles={[styles.jst, {flexDirection: 'row',}]}>
+  <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20,marginVertical: 10,}}>
+<Text style={{color: '#FFFFFF', fontSize: 30, borderColor: 'white', borderWidth: 2,}}>Home</Text>
+
+<View style={{height: 50, width: 50, backgroundColor: 'white', borderRadius: 50, }}></View>
+      </View>
+      </View>
+  )
+}
+
 export default function HomePage() {
   return (
     <View style={styles.container}>
-      <View styles={{ paddingHorizontal: 40, }}>
-<Text style={{color: '#FFFFFF', fontSize: 30, paddingHorizontal: 20,}}>Home</Text>
-      </View>
+     
+      <Header />
+    
     <NavigationContainer independent={true}>
       <Tab.Navigator
       initialRouteName="Home"
@@ -52,6 +64,7 @@ export default function HomePage() {
       <Tab.Screen name="Live" component={Live} />
     </Tab.Navigator>
     </NavigationContainer>
+  
     </View>
   );
 }
@@ -61,5 +74,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#0A0A0A',
     paddingTop: 40,
     
-  }
+  },
+  jst: {
+  flexDirection: 'row',
+  
+  },
+ 
 })

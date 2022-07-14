@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput,
     ScrollView, FlatList, Dimensions, SafeAreaView, StatusBar, } from 'react-native'
 import React, {Component} from 'react'
 import { useFonts } from 'expo-font';
-
+import { AntDesign } from '@expo/vector-icons'; 
 
 
 const datalist =[{key: 1},{key: 2},{key: 3}, {key: 4}, {key: 5}, {key: 6},]
@@ -14,7 +14,11 @@ const WIDTH = Dimensions.get('window').width
 
 const Input =(props) => {
     return(
-      <View>
+      <View style={[styles.input, {flexDirection: 'row', alignItems: 'center',
+      }]}>
+        <View style={{padding: 10,}}>
+        <AntDesign name="search1" size={24} color="white" />
+        </View>
   <TextInput style={props.style} 
         placeholder={props.placeholder}
         placeholderTextColor={props.textColor}
@@ -49,7 +53,8 @@ const Search = () => {
 
     <View style={styles.container}>
         <ScrollView>
-        <Input style={styles.input} placeholder="Search" textColor="#FFFFFF90"
+        <Input style={[styles.input, {paddingTop: 20,}]} placeholder="Search" textColor="#FFFFFF90"
+        
         />
         <Text style={{color: '#FFFFFF', //fontFamily: 'DMSans-Med',
          fontSize: 20, marginVertical: 10,}}>Trending</Text>
@@ -113,7 +118,8 @@ const styles = StyleSheet.create({
     margin: 0,
     marginVertical: 20,
     height: 50,
-    padding: 10,
+    
+    alignItems: 'center',
     fontSize: 16,
     backgroundColor: "#353736",
     borderRadius: 5,
