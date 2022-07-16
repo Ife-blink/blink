@@ -1,6 +1,6 @@
 node_modules/
 dist/
-Firebase.js
+firebase.js
 npm-debug.*
 *.jks
 *.p8
@@ -12,3 +12,4 @@ web-build/
 
 # macOS
 .DS_Store
+firebase.js
