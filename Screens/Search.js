@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, TextInput,
-    ScrollView, FlatList, Dimensions, SafeAreaView, StatusBar, } from 'react-native'
-import React, {Component} from 'react'
+    ScrollView, FlatList, Dimensions, SafeAreaView, StatusBar, ActivityIndicator } from 'react-native'
+import React, {Component, useState, useEffect} from 'react'
 import { useFonts } from 'expo-font';
 import { AntDesign } from '@expo/vector-icons'; 
-
+import List from '../Components/List';
+import SearchBar from '../Components/SearchBar';
 
 const datalist =[{key: 1},{key: 2},{key: 3}, {key: 4}, {key: 5}, {key: 6},]
 
@@ -30,6 +31,21 @@ const Input =(props) => {
 
 const Search = () => {
 
+  const [searchPhrase, setSearchPhrase] = useState("");
+  const [clicked, setClicked] = useState(false);
+  const [fakeData, setFakeData] = useState();
+
+  // get data from the fake api
+  useEffect(() => {
+    const getData = async () => {
+      const apiResponse = await fetch(
+        "https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages"
+      );
+      const data = await apiResponse.json();
+      setFakeData(data);
+    };
+    getData();
+  }, []);
   
 
     const renderitems =({item, index})=> {
@@ -53,9 +69,25 @@ const Search = () => {
 
     <View style={styles.container}>
         <ScrollView>
-        <Input style={[styles.input, {paddingTop: 20,}]} placeholder="Search" textColor="#FFFFFF90"
+        {!clicked && <Text style={styles.title}>Programming Languages</Text>}
+
+      <SearchBar
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+        clicked={clicked}
+        setClicked={setClicked}
+      />
+      {!fakeData ? (
+        <ActivityIndicator size="large" />
+      ) : (
         
-        />
+          <List
+            searchPhrase={searchPhrase}
+            data={fakeData}
+            setClicked={setClicked}
+          />
+        
+      )}
         <Text style={{color: '#FFFFFF', //fontFamily: 'DMSans-Med',
          fontSize: 20, marginVertical: 10,}}>Trending</Text>
         <FlatList
