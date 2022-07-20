@@ -62,22 +62,16 @@ const Search = () => {
         </View>
         )
     }
-
-    
-
-  return (
-
-    <View style={styles.container}>
-        <ScrollView>
-        {!clicked && <Text style={styles.title}>Programming Languages</Text>}
-
-      <SearchBar
+    const Recent = () => {
+      return (
+        <List
         searchPhrase={searchPhrase}
-        setSearchPhrase={setSearchPhrase}
-        clicked={clicked}
+        data={fakeData}
         setClicked={setClicked}
-      />
-      {!fakeData ? (
+      /> 
+      )
+    }
+/*{!fakeData ? (
         <ActivityIndicator size="large" />
       ) : (
         
@@ -85,9 +79,33 @@ const Search = () => {
             searchPhrase={searchPhrase}
             data={fakeData}
             setClicked={setClicked}
-          />
+          /> 
         
-      )}
+          )} */
+    const Header = () =>{
+      return(
+        <View style={{alignItems: 'center', justifyContent: 'center', marginVertical: 5,}}>
+          <Text style={{color: 'white', fontSize: 30,}}> Search</Text>
+        </View>
+      )
+    }
+
+  return (
+
+    <View style={styles.container}>
+        <ScrollView>
+        {!clicked && <Header />}
+   <View style={{flex: 1, position: 'relative', zIndex: 100,}}>
+      <SearchBar
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+        clicked={clicked}
+        setClicked={setClicked}
+      />
+      {clicked && <Recent />}
+      </View>
+      <View style={{ flex: 1, //position: "relative", zIndex: 200,
+      }}>
         <Text style={{color: '#FFFFFF', //fontFamily: 'DMSans-Med',
          fontSize: 20, marginVertical: 10,}}>Trending</Text>
         <FlatList
@@ -105,6 +123,7 @@ const Search = () => {
        numColumns={numColumns}
        keyExtractor={(item, index) => index.toString()}
       />
+      </View>
       </ScrollView>
     </View>
     

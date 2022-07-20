@@ -1,11 +1,19 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Keyboard, Button } from "react-native";
-import { Feather, Entypo } from "@expo/vector-icons";
+import { StyleSheet, TextInput, View, Keyboard, Button, Pressable, Text} from "react-native";
+import { Feather, Entypo, AntDesign, Ionicons  } from "@expo/vector-icons";
 
 
 const SearchBar = (props) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: '#0a0a0a', paddingLeft: 0,}]}>
+      {props.clicked && (
+          <Ionicons name="arrow-back-outline" size={25} color="white" style={{ padding: 1, 
+          }} onPress={() => {
+            Keyboard.dismiss();
+            props.setClicked(false);
+          }}/>
+        )}
+      <View style={styles.container}>
       <View
         style={
           !props.clicked
@@ -13,39 +21,29 @@ const SearchBar = (props) => {
             : styles.searchBar__clicked
         }
       >
-        <Feather
-          name="search"
-          size={20}
-          color="black"
-          style={{ marginLeft: 1 }}
-        />
+        
+       <AntDesign name="search1" size={24} color="white" />
         <TextInput
           style={styles.input}
           placeholder="Search"
+          placeholderTextColor={"#FFFFFF"}
           value={props.searchPhrase}
           onChangeText={props.setSearchPhrase}
           onFocus={() => {
             props.setClicked(true);
           }}
         />
-        
+        </View>
         {props.clicked && (
-          <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+           <View style={{ alignItems: 'center', marginHorizontal: 3, borderRadius: 3,
+           justifyContent: 'center', backgroundColor: '#FFFFFF40', }}>
+          <Ionicons name="backspace-outline" size={25} color="white" style={{ padding: 1, 
+          }} onPress={() => {
               props.setSearchPhrase("")
           }}/>
+          </View>
         )}
       </View>
-      {props.clicked && (
-        <View>
-          <Button
-            title="Cancel"
-            onPress={() => {
-              Keyboard.dismiss();
-              props.setClicked(false);
-            }}
-          ></Button>
-        </View>
-      )}
     </View>
   );
 };
@@ -54,33 +52,48 @@ export default SearchBar;
 
 const styles = StyleSheet.create({
   container: {
-    margin: 15,
+    margin: 0,
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
-    width: "90%",
+    width: "100%",
+    backgroundColor: "#353736",
+    borderRadius: 3,
+    paddingLeft: 5,
     
   },
   searchBar__unclicked: {
-    padding: 10,
+    
+    paddingVertical: 10,
     flexDirection: "row",
-    width: "95%",
-    backgroundColor: "#d9dbda",
+    width: "100%",
+    backgroundColor: '#353736',
     borderRadius: 15,
     alignItems: "center",
+    justifyContent: "center",
+    
+    
   },
   searchBar__clicked: {
     padding: 10,
     flexDirection: "row",
     width: "80%",
-    backgroundColor: "#d9dbda",
+    backgroundColor: "#353736",
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "space-evenly",
   },
   input: {
-    fontSize: 20,
+    fontSize: 18,
     marginLeft: 10,
     width: "90%",
+    color: "white",
+    paddingLeft: 3,
+  },
+  cancelbtn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
+    padding: 2,
   },
 });

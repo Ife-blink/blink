@@ -11,7 +11,7 @@ import {
 const Item = ({ name, details }) => (
   <View style={styles.item}>
     <Text style={styles.title}>{name}</Text>
-    <Text style={styles.details}>{details}</Text>
+    <Text style={{color: 'white'}}>{details}</Text>
   </View>
 );
 
@@ -53,18 +53,17 @@ export default List;
 
 const styles = StyleSheet.create({
   list__container: {
-    margin: 10,
-    height: "85%",
     width: "100%",
-  },
+    height: '50%',
+  }, 
   item: {
-    margin: 30,
+    padding: 10,
     borderBottomWidth: 2,
     borderBottomColor: "lightgrey"
+    
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
     marginBottom: 5,
    
     color: 'white',
